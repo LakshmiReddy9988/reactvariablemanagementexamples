@@ -4,6 +4,7 @@ import ErrorHandlingComponent from './ErrorHandlingComponent';
 import LanguageContext from './LanguageContext';
 import DisplaySelectedLanguage from './DisplaySelectedLanguage';
 import ShowSomeMoreVarsFromContext from "./ShowSomeMoreVarsFromContext";
+import './App.css';
 function App() {  
 
 
@@ -68,6 +69,14 @@ const dispatch_2 = store.getState();
 store.dispatch({ type: 'MINUS', payload: 2 });
 const dispatch_3 = store.getState(); 
 
+function handleInputClick(ref1, ref2, value) {
+  ref1.current.focus();
+  ref1.current.value = value;
+  ref1.current.classList.add('add-background');
+  ref2.current.value = '';
+  ref2.current.classList.remove('add-background');
+}
+
 
 //1
 
@@ -87,10 +96,10 @@ const dispatch_4 = store.getState();
   <p> State after -2 payload: { dispatch_3 } </p>
   <p> State after 7 payload: { dispatch_4 } </p>
 
-  <button onClick={()=>{inputRef.current.focus();}}>Focus switch to input1  using ref</button>
+  <button onClick={() => handleInputClick(inputRef, input2Ref, 'input1')}>Focus switch to input1  using ref</button>
   
   
-  <button onClick={()=>{input2Ref.current.focus(); }}>Focus switch to input2  using ref</button>
+  <button onClick={() => handleInputClick(input2Ref, inputRef, 'input2')}>Focus switch to input2  using ref</button>
   
   
   <button onClick={()=>{throw new Error("Error was thrown") }}>Generate error </button>
